@@ -1,0 +1,227 @@
+﻿<UserControl x:Class="ExerciseRecord.MVVM.View.HighlightView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ExerciseRecord.MVVM.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="515" d:DesignWidth="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="280"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel VerticalAlignment="Bottom">
+            <TextBlock Text="이번 주 총"
+                       Foreground="Gray"
+                       FontSize="15" Margin="20,0,0,0"/>
+            <TextBlock Text="00시간 00분"
+                       Foreground="White"
+                       FontSize="35" Margin="20,0,0,10"/>
+            <TextBlock Text="이번 주 평균"
+                       Foreground="Gray"
+                       FontSize="15" Margin="20,0,0,0"/>
+            <TextBlock Text="00시간 00분"
+                       Foreground="White"
+                       FontSize="35" Margin="20,0,0,20"/>
+
+            <Border 
+                Background="#2f2d40"
+                CornerRadius="10" Height="280"
+                Padding="15,10,15,10" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.ColumnSpan="7">
+                        <TextBlock Text="00시간 00분"
+                                   FontSize="11" Margin="0,0,0,3"
+                                   Foreground="#4eff91"
+                                   HorizontalAlignment="Right"/>
+                        <Border Height="5"
+                                CornerRadius="2"
+                                Background="#4eff91"
+                                VerticalAlignment="Top"/>
+                    </StackPanel>
+
+                    <Border Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1"
+                           Text="월요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border Grid.Column="1"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1"
+                           Text="화요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border Grid.Column="2"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="2"
+                           Text="수요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border Grid.Column="3"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="3"
+                           Text="목요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border Grid.Column="4"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="4"
+                           Text="금요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border Grid.Column="5"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="5"
+                           Text="토요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border Grid.Column="6"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,15,0,0"/>
+                    <TextBlock Grid.Row="1" Grid.Column="6"
+                           Text="일요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Margin="10,0,15,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Background="#2f2d40"
+                        CornerRadius="10"
+                        Margin="0,0,0,6" Padding="14,10">
+                    <StackPanel>
+                        <TextBlock Text="오늘 운동량이 어제보다"
+                                   Foreground="White"/>
+                        <TextBlock Text="00분 줄었습니다."
+                                   Foreground="White"/>
+                        <Separator Background="Gray" Margin="0,5,0,10"/>
+                        <TextBlock Text="00시간 00분"
+                                   Foreground="#4eff91"/>
+                        <Border Background="#4eff91"
+                                CornerRadius="5"
+                                Height="13"
+                                Margin="0,3,0,5"/>
+                        <TextBlock Text="00시간 00분"
+                                   Foreground="Gray"/>
+                        <Border Background="Gray"
+                                CornerRadius="5"
+                                Height="13"
+                                Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="1"
+                        Background="#2f2d40"
+                        CornerRadius="10"
+                        Margin="0,4,0,4" Padding="14,10">
+                    <StackPanel>
+                        <TextBlock Text="이번 주 평균 운동량이 저번주보다"
+                                   Foreground="White"/>
+                        <TextBlock Text="00분 늘었습니다."
+                                   Foreground="White"/>
+                        <Separator Background="Gray" Margin="0,5,0,10"/>
+                        <TextBlock Text="00시간 00분"
+                                   Foreground="#4eff91"/>
+                        <Border Background="#4eff91"
+                                CornerRadius="5"
+                                Height="13"
+                                Margin="0,3,0,5"/>
+                        <TextBlock Text="00시간 00분"
+                                   Foreground="Gray"/>
+                        <Border Background="Gray"
+                                CornerRadius="5"
+                                Height="13"
+                                Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Row="2"
+                        Background="#2f2d40"
+                        CornerRadius="10"
+                        Margin="0,6,0,0" Padding="14,10">
+                    <StackPanel>
+                        <TextBlock Text="이번 달 평균 운동량이 저번달보다"
+                                   Foreground="White"/>
+                        <TextBlock Text="00분 늘었습니다."
+                                  Foreground="White"/>
+                        <Separator Background="Gray" Margin="0,5,0,10"/>
+                        <TextBlock Text="00시간 00분"
+                                   Foreground="#4eff91"/>
+                        <Border Background="#4eff91"
+                                CornerRadius="5"
+                                Height="13"
+                                Margin="0,3,0,5"/>
+                        <TextBlock Text="00시간 00분"
+                                   Foreground="Gray"/>
+                        <Border Background="Gray"
+                                CornerRadius="5"
+                                Height="13"
+                                Margin="0,3,0,0"/>
+                    </StackPanel>
+                </Border>
+                
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
