@@ -38,8 +38,29 @@
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
                     Margin="0,15,15,0" Cursor="Hand"
-                    Width="85" Height="25"
-                    Style="{StaticResource ButtonTheme}">
+                    Width="85" Height="25">
+                <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF4C70"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                </Button.Style>
+
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="85" Height="25"
+                                CornerRadius="12"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
             </Button>
 
             <TextBlock Text="Exercise Record"

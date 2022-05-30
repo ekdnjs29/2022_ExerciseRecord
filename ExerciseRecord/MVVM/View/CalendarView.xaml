@@ -346,44 +346,72 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                
+
                 <Border Background="#2f2d40"
                         CornerRadius="10"
-                        Height="200"  Padding="14,10">
+                        Height="200"  Padding="14,11">
                     <StackPanel>
                         <ListView Background="#2f2d40"
                                   BorderThickness="0"
-                                  Height="180">
-                            
+                                  Height="180" 
+                                  d:ItemsSource="{d:SampleData ItemCount=5}"
+                                  ItemsSource="{Binding Exercise}">
+                            <ListView.Resources>
+                                <Style TargetType="{x:Type ScrollBar}">
+                                    <Setter Property="Background" Value="Gray"/>
+                                    <Setter Property="BorderBrush" Value="Gray"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                                <Grid x:Name="Bg" SnapsToDevicePixels="True">
+                                                  
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="3" Margin="0,0,0,1"
+                                    BorderBrush="#4b4863"
+                                    BorderThickness="2,0,0,0">
+                                        <StackPanel >
+                                            <TextBlock Text="{Binding ExeName}"
+                                           FontWeight="Black" Foreground="White"
+                                           Margin="10,0,0,3"/>
+                                            <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Time}"
+                                           Margin="10,0,20,5" Foreground="Gray"/>
+                                            <TextBlock Text="{Binding Set}"
+                                                       Foreground="Gray"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </StackPanel>
                 </Border>
-
                 <Border Grid.Row="1"
                         CornerRadius="10"
                         Margin="0,10,0,0" Padding="14,10"
                         Height="143">
-
                     <Border.Background>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                             <GradientStop Color="#ffc554 " Offset="0.0"/>
                             <GradientStop Color="#ffb012" Offset="1"/>
                         </LinearGradientBrush>
                     </Border.Background>
-                    
                     <StackPanel>
                         <TextBlock Text="Memo"
                                    FontSize="20"
                                    Foreground="White"/>
                         <TextBlock Text=""
                                    Foreground="White"/>
-                        
-                        
-                        
                     </StackPanel>
                 </Border>
-
-
             </Grid>
         </StackPanel>
     </Grid>

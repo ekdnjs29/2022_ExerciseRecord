@@ -81,15 +81,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Theme\ButtonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Theme\MenuButtonTheme.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Theme\TextBoxTheme.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +125,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Memo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Count.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LegRaise.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Plank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PushUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SitUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Timer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,18 +24,18 @@ namespace ExerciseRecord.MVVM.View
         {
             InitializeComponent();
         }
-
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        List<Exercise> items = new List<Exercise>();
+        public class Exercise
         {
-
+            public Image Image { get; set; }
+            public string ExeName { get; set; }
+            public int Time { get; set; }
+            public int Set { get; set; }
         }
 
-        private void btnAddMemo_Click(object sender, RoutedEventArgs e)
+        private void btnMemo_Click(object sender, RoutedEventArgs e)
         {
-            if (tbinputMemo.Text != "")
-            {
-                txtTodayMemo.Text += tbinputMemo.Text + "\n"; 
-            }
+           
         }
     }
 }

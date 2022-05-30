@@ -24,27 +24,38 @@
         <Border Grid.Row="1" Margin="0,0,5,20"
                  Background="#F1F2F6"
                  CornerRadius="10"
-                Width="320" Height="445">
-            <StackPanel>
-                <ListView Margin="10"
-                          Background="#F1F2F6"
+                 Width="320" Height="445">
+            <ListView Margin="15,20"
+                      Background="#F1F2F6"
                       BorderThickness="0"
-                      Height="385">
+                      d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Image Height="70" Width="70"
+                                   Source="{Binding Image}"></Image>
+                            <Border Grid.Column="1" Margin="5,0,0,0" Padding="5"
+                                    BorderBrush="#5bc3ff"
+                                    BorderThickness="2,0,0,0">
+                            <StackPanel >
+                                <TextBlock Text="{Binding ExeName}"
+                                           FontWeight="Black"
+                                           Margin="5,0,0,5"/>
+                                <TextBlock Text="{Binding Time}"
+                                           Margin="5,0,0,5"/>
+                                    <TextBlock Text="{Binding Set}"
+                                           Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-                </ListView>
-
-                <Button x:Name="btnAdd" 
-                    Click="btnAdd_Click"
-                    Grid.Row="1"
-                    Content="Add"
-                    Foreground="White"
-                    FontSize="15"
-                    HorizontalAlignment="Right"
-                    Margin="0,0,10,10" Cursor="Hand"
-                    Width="100" Height="30"
-                    Style="{StaticResource ButtonTheme}">
-                </Button>
-            </StackPanel>
+            </ListView>
         </Border>
 
 
@@ -74,37 +85,48 @@
                                    Rect="0,0,320,350"/>
                 </Border.Clip>
 
+                <Grid>
+                    <Image Height="210" Width="95"
+                           Source="/Images/Memo.png"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="-10,0,0,3" RenderTransformOrigin="0.5,0.5">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-6"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                    <StackPanel>
 
-                <StackPanel>
-                    <TextBlock Text="Memo" Margin="15,10,0,-10"
+                        <TextBlock Text="Memo" Margin="15,10,0,0"
                                Foreground="White"
                                FontSize="28" Height="50"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"/>
-                    <TextBlock x:Name="txtTodayMemo"
-                               Height="230" Width="300"
-                               Margin="10"  
-                               Foreground="White"
-                               FontSize="20"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"/>
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Bottom"
-                                Margin="10">
-                        <TextBox x:Name="tbinputMemo"
-                                 Width="190" Height="30"
-                                 VerticalAlignment="Bottom"
-                                 Margin="0,0,10,0"
-                                 Style="{StaticResource TextBoxTheme}">
-                        </TextBox>
-                        <Button x:Name="btnAddMemo" 
-                                Click="btnAddMemo_Click"
+                        <TextBox x:Name="txtTodayMemo"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Height="230" Width="290"
+                                 Margin="15,0,15,15"
+                                 Foreground="White"
+                                 FontSize="20"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Center"
+                                 AcceptsReturn="True" 
+                                 TextWrapping="Wrap"/>
+
+                        <Button x:Name="btnMemo" 
+                                Click="btnMemo_Click"
                                 Grid.Row="1"
-                                Content="Add"
+                                Content="저장"
                                 Foreground="White"
                                 FontSize="15"
                                 HorizontalAlignment="Right"
-                                Cursor="Hand"
+                                Cursor="Hand" Margin="0,0,15,15"
                                 Width="100" Height="30">
                             <Button.Style>
                                 <Style TargetType="Button">
@@ -117,7 +139,6 @@
                                     </Style.Triggers>
                                 </Style>
                             </Button.Style>
-
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
                                     <Border Width="100" Height="30"
@@ -128,11 +149,11 @@
                                     </Border>
                                 </ControlTemplate>
                             </Button.Template>
-
                         </Button>
-                    </StackPanel>
-                </StackPanel>
 
+
+                    </StackPanel>
+                </Grid>
             </Border>
         </StackPanel>
     </Grid>

@@ -25,6 +25,5 @@ namespace ExerciseRecord.MVVM.View
             InitializeComponent();
         }
 
-       
     }
 }
