@@ -333,7 +333,7 @@
             <RowDefinition/>
             <RowDefinition Height ="65"/>
         </Grid.RowDefinitions>
-        <Calendar CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" />
+        <Calendar SelectedDatesChanged="Calendar_SelectedDatesChanged" CalendarItemStyle="{DynamicResource CalendarCalendarItemStyle1}" CalendarDayButtonStyle="{DynamicResource CalendarCalendarDayButtonStyle1}" Style="{DynamicResource CalendarStyle1}" />
         <StackPanel Grid.Column="1" Margin="10,10,10,0">
             <TextBlock Text="총"
                        Foreground="Gray"
