@@ -60,7 +60,7 @@ namespace ExerciseRecord.MVVM.View
         {
             FirebaseResponse response = await _client.GetAsync(today + "/LR");
             int value = response.ResultAs<int>();
-            MessageBox.Show(value.ToString());
+            //MessageBox.Show(value.ToString());
         }
 
         List<Exercise> items = new List<Exercise>();

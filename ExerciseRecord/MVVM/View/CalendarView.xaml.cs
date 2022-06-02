@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace ExerciseRecord.MVVM.View
         private const string BasePath = "https://dcdc-14c7d-default-rtdb.firebaseio.com/";//본인의 FB URL
         private const string FirebaseSecret = "e54zPLcujgDI9A9LflL9zVzrgyJIWbjbfT5bszzC"; // FB 비번
         private static FirebaseClient _client;
+        public string ttdd;
+
+        string connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dawon\source\repos\ExerciseRecord\ExerciseRecord\Memo.mdf;Integrated Security=True";
 
         public CalendarView()
         {
@@ -42,13 +46,50 @@ namespace ExerciseRecord.MVVM.View
             //캘린더 날짜 
             var date = sender as Calendar;
             string td = date.SelectedDate.ToString();
-            string ttdd = td.Substring(0, 10);
+            ttdd = td.Substring(0, 10);
             ttdd = ttdd.Replace("-", "");
 
             //날짜에 해당하는 데이터
             FirebaseResponse response = await _client.GetAsync(ttdd + "/LR");
             int value = response.ResultAs<int>();
-            MessageBox.Show(value.ToString());
+            //MessageBox.Show(value.ToString());
+
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", ttdd);
+
+            SqlCommand comm = new SqlCommand(sql, conn);
+            int count = Convert.ToInt32(comm.ExecuteScalar());
+
+            if (count == 1)
+            {
+                // MessageBox.Show("1");
+                Memo();
+            }
+            else
+                lblMemo.Text = "";
+           
+            conn.Close();
+        }
+
+        private void Memo()
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string sql = string.Format("SELECT * FROM MemoTable WHERE Date='{0}'", ttdd);
+
+            SqlCommand comm = new SqlCommand(sql, conn);
+            SqlDataReader reader = comm.ExecuteReader();
+
+            reader.Read();
+
+            string x = (string)reader["Memo"];
+            lblMemo.Text = x;
+
+            reader.Close();
+
         }
     }
 }

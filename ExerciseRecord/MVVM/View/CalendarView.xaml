@@ -408,7 +408,8 @@
                         <TextBlock Text="Memo"
                                    FontSize="20"
                                    Foreground="White"/>
-                        <TextBlock Text=""
+                        <TextBlock x:Name="lblMemo"
+                                   Text=""
                                    Foreground="White"/>
                     </StackPanel>
                 </Border>
