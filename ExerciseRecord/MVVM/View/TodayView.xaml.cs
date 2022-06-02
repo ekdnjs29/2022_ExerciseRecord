@@ -33,6 +33,7 @@ namespace ExerciseRecord.MVVM.View
 
         string connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dawon\source\repos\ExerciseRecord\ExerciseRecord\Memo.mdf;Integrated Security=True";
         DispatcherTimer t = new DispatcherTimer();
+        string date = DateTime.Now.ToString("yyyyMMdd");
 
         public TodayView()
         {
@@ -74,16 +75,56 @@ namespace ExerciseRecord.MVVM.View
         private void btnMemo_Click(object sender, RoutedEventArgs e)
         {
             SqlConnection conn = new SqlConnection(connStr);
-            string date = DateTime.Now.ToString("yyyyMMdd");
+            conn.Open();
 
-            string sqld = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", date);
-            if()
+            string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", date);
+            
+            SqlCommand comm = new SqlCommand(sql, conn);
+            int count = Convert.ToInt32(comm.ExecuteScalar());
 
+            if (count == 1)
+            {
+                MessageBox.Show("1");
+                Update();
+            }
+            else
+            {
+                MessageBox.Show("0");
+                Add();
+            }
+            conn.Close();
+        }
+
+        private void Add()
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
 
             string sql = string.Format("INSERT INTO MemoTable Values ('{0}', '{1}')", date, txtTodayMemo.Text);
-            MessageBox.Show(sql);
 
-            
+            SqlCommand comm = new SqlCommand(sql, conn);
+            int x = comm.ExecuteNonQuery();
+
+            if (x == 1)
+                MessageBox.Show("성공");
+
+            conn.Close();
+        }
+
+        private void Update()
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string sql = string.Format("UPDATE MemoTAble SET Memo='{0}' WHERE Date='{1}'", txtTodayMemo.Text, date);
+
+            SqlCommand comm = new SqlCommand(sql, conn);
+            int x = comm.ExecuteNonQuery();
+
+            if (x == 1)
+                MessageBox.Show("성공");
+
+            conn.Close();
         }
     }
 }
