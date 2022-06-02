@@ -338,7 +338,7 @@
             <TextBlock Text="총"
                        Foreground="Gray"
                        FontSize="15"/>
-            <TextBlock Text="00시간 00분"
+            <TextBlock x:Name="txtETime"
                        Foreground="White"
                        FontSize="35" Margin="0,0,0,20"/>
             <Grid>
@@ -351,7 +351,8 @@
                         CornerRadius="10"
                         Height="200"  Padding="14,11">
                     <StackPanel>
-                        <ListView Background="#2f2d40"
+                        <ListView x:Name="CList"
+                                  Background="#2f2d40"
                                   BorderThickness="0"
                                   Height="180" 
                                   d:ItemsSource="{d:SampleData ItemCount=5}"
@@ -379,12 +380,13 @@
                                     BorderThickness="2,0,0,0">
                                         <StackPanel >
                                             <TextBlock Text="{Binding ExeName}"
-                                           FontWeight="Black" Foreground="White"
+                                                       Foreground="White"
+                                                       FontSize="15"
                                            Margin="10,0,0,3"/>
                                             <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Time}"
-                                           Margin="10,0,20,5" Foreground="Gray"/>
-                                            <TextBlock Text="{Binding Set}"
+                                            <TextBlock Text="{Binding info}"
+                                           Margin="10,0,20,0"
+                                                       FontSize="14"
                                                        Foreground="Gray"/>
                                             </StackPanel>
                                         </StackPanel>
@@ -409,7 +411,7 @@
                                    FontSize="20"
                                    Foreground="White"/>
                         <TextBlock x:Name="lblMemo"
-                                   Text=""
+                                   FontSize="18"
                                    Foreground="White"/>
                     </StackPanel>
                 </Border>

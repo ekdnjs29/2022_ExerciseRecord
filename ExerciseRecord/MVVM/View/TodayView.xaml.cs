@@ -46,53 +46,126 @@ namespace ExerciseRecord.MVVM.View
             };
             _client = new FirebaseClient(config);
 
-            DateTime datetime = DateTime.Now;
-            today = datetime.ToString();
-            today = today.Substring(0, 10);
-            today = today.Replace("-", "");
-
             getfb();
+            getfbt();
 
-            t.Interval = new TimeSpan(0, 0, 1); //1초
-        }
-
-        private async void getfb()
-        {
-            FirebaseResponse response = await _client.GetAsync(today + "/LR");
-            int value = response.ResultAs<int>();
-            //MessageBox.Show(value.ToString());
-        }
-
-        List<Exercise> items = new List<Exercise>();
-        public class Exercise
-        {
-            public Image Image { get; set; }
-            public string ExeName { get; set; }
-            public int Time { get; set; }
-            public int Set { get; set; }
-        }
-
-        private void btnMemo_Click(object sender, RoutedEventArgs e)
-        {
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
             string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", date);
-            
+
             SqlCommand comm = new SqlCommand(sql, conn);
             int count = Convert.ToInt32(comm.ExecuteScalar());
 
             if (count == 1)
             {
-                MessageBox.Show("1");
-                Update();
+                // MessageBox.Show("1");
+                Memo();
             }
-            else
-            {
-                MessageBox.Show("0");
-                Add();
-            }
+
             conn.Close();
+        }
+
+        private async void getfbt()
+        {
+            FirebaseResponse response = await _client.GetAsync(date + "/ET");
+            int value = response.ResultAs<int>();
+            if (value > 3600)
+                txtTodayTime.Text = (value / 3600).ToString("00") + "시간 " + (value - (value / 3600) % 60).ToString("00") + "분";
+            else
+                txtTodayTime.Text = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
+        }
+
+        private void Memo()
+        {
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string sql = string.Format("SELECT * FROM MemoTable WHERE Date='{0}'", date);
+
+            SqlCommand comm = new SqlCommand(sql, conn);
+            SqlDataReader reader = comm.ExecuteReader();
+
+            reader.Read();
+
+            string x = (string)reader["Memo"];
+            txtTodayMemo.Text = x;
+
+            reader.Close();
+        }
+
+        List<Exercise> items = new List<Exercise>();
+        public class Exercise
+        {
+            public string Image { get; set; }
+            public string ExeName { get; set; }
+            public string info { get; set; }
+        }
+
+        private async void getfb()
+        {
+            FirebaseResponse response = await _client.GetAsync(date + "/LR");
+            int value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { Image = "/Images/LegRaise.png", ExeName = "LegRaise", info = value.ToString() + "회" });
+                todayList.ItemsSource = items;
+                todayList.Items.Refresh();
+            }
+
+            response = await _client.GetAsync(date + "/PL");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { Image = "/Images/Plank.png", ExeName = "Plank", info = value.ToString() + "초" });
+                todayList.ItemsSource = items;
+                todayList.Items.Refresh();
+            }
+
+            response = await _client.GetAsync(date + "/SU");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { Image = "/Images/SitUp.png", ExeName = "Sit Up", info = value.ToString() + "회" });
+                todayList.ItemsSource = items;
+                todayList.Items.Refresh();
+            }
+
+            response = await _client.GetAsync(date + "/PU");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { Image = "/Images/PushUp.png", ExeName = "Push Up", info = value.ToString() + "회" });
+                todayList.ItemsSource = items;
+                todayList.Items.Refresh();
+            }
+        }
+
+
+        private void btnMemo_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtTodayMemo.Text != "")
+            {
+                SqlConnection conn = new SqlConnection(connStr);
+                conn.Open();
+
+                string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", date);
+
+                SqlCommand comm = new SqlCommand(sql, conn);
+                int count = Convert.ToInt32(comm.ExecuteScalar());
+
+                if (count == 1)
+                {
+                    MessageBox.Show("1");
+                    Update();
+                }
+                else
+                {
+                    MessageBox.Show("0");
+                    Add();
+                }
+                conn.Close();
+            }
         }
 
         private void Add()

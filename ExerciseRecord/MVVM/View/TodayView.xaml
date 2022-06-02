@@ -25,18 +25,19 @@
                  Background="#F1F2F6"
                  CornerRadius="10"
                  Width="320" Height="445">
-            <ListView Margin="15,20"
+            <ListView x:Name="todayList"
+                      Margin="15,20"
                       Background="#F1F2F6"
                       BorderThickness="0"
                       d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,5">
+                        <Grid Margin="0,0,0,5" Height="70">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="70"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Image Height="70" Width="70"
+                            <Image Height="60" Width="60" 
                                    Source="{Binding Image}"></Image>
                             <Border Grid.Column="1" Margin="5,0,0,0" Padding="5"
                                     BorderBrush="#5bc3ff"
@@ -44,11 +45,12 @@
                             <StackPanel >
                                 <TextBlock Text="{Binding ExeName}"
                                            FontWeight="Black"
+                                           FontSize="18"
                                            Margin="5,0,0,5"/>
-                                <TextBlock Text="{Binding Time}"
-                                           Margin="5,0,0,5"/>
-                                    <TextBlock Text="{Binding Set}"
+                                <TextBlock Text="{Binding info}"
+                                           FontSize="15"
                                            Margin="5,0,0,0"/>
+                                   
                                 </StackPanel>
                             </Border>
                         </Grid>
@@ -63,7 +65,7 @@
             <TextBlock Text="오늘 총"
                        Foreground="Gray"
                        FontSize="15"/>
-            <TextBlock Text="00시간 00분"
+            <TextBlock x:Name="txtTodayTime"
                        Foreground="White"
                        FontSize="40" Margin="0,0,0,20"/>
 
