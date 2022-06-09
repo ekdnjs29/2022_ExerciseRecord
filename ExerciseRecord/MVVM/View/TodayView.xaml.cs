@@ -29,7 +29,6 @@ namespace ExerciseRecord.MVVM.View
         private const string BasePath = "https://dcdc-14c7d-default-rtdb.firebaseio.com/";//본인의 FB URL
         private const string FirebaseSecret = "e54zPLcujgDI9A9LflL9zVzrgyJIWbjbfT5bszzC"; // FB 비번
         private static FirebaseClient _client;
-        public string today;
 
         string connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dawon\source\repos\ExerciseRecord\ExerciseRecord\Memo.mdf;Integrated Security=True";
         DispatcherTimer t = new DispatcherTimer();
@@ -47,7 +46,6 @@ namespace ExerciseRecord.MVVM.View
             _client = new FirebaseClient(config);
 
             getfb();
-            getfbt();
 
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
@@ -64,6 +62,25 @@ namespace ExerciseRecord.MVVM.View
             }
 
             conn.Close();
+        }
+
+        private async void getfb()
+        {
+            FirebaseResponse response = await _client.GetAsync(date + "/OC");
+            if (response.ResultAs<string>() == null)
+            {
+                _client.Set<int>(date + "/LR", 0);
+                _client.Set<int>(date + "/PU", 0);
+                _client.Set<int>(date + "/PL", 0);
+                _client.Set<int>(date + "/SU", 0);
+                _client.Set<int>(date + "/ET", 0);
+                _client.Set<int>(date + "/OT", 0);
+                _client.Set<int>(date + " / OC", 0);
+                response = await _client.GetAsync("20220608" + "/LR");
+                MessageBox.Show(response.ResultAs<string>());
+            }
+            getfbe();
+            getfbt();
         }
 
         private async void getfbt()
@@ -102,7 +119,7 @@ namespace ExerciseRecord.MVVM.View
             public string info { get; set; }
         }
 
-        private async void getfb()
+        private async void getfbe()
         {
             FirebaseResponse response = await _client.GetAsync(date + "/LR");
             int value = response.ResultAs<int>();
@@ -156,12 +173,12 @@ namespace ExerciseRecord.MVVM.View
 
                 if (count == 1)
                 {
-                    MessageBox.Show("1");
+                    //MessageBox.Show("수정");
                     Update();
                 }
                 else
                 {
-                    MessageBox.Show("0");
+                    //MessageBox.Show("추가");
                     Add();
                 }
                 conn.Close();
@@ -178,8 +195,8 @@ namespace ExerciseRecord.MVVM.View
             SqlCommand comm = new SqlCommand(sql, conn);
             int x = comm.ExecuteNonQuery();
 
-            if (x == 1)
-                MessageBox.Show("성공");
+            //if (x == 1)
+                //MessageBox.Show("성공");
 
             conn.Close();
         }
@@ -194,8 +211,8 @@ namespace ExerciseRecord.MVVM.View
             SqlCommand comm = new SqlCommand(sql, conn);
             int x = comm.ExecuteNonQuery();
 
-            if (x == 1)
-                MessageBox.Show("성공");
+            //if (x == 1)
+                //MessageBox.Show("성공");
 
             conn.Close();
         }

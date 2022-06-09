@@ -20,13 +20,15 @@
             <TextBlock Text="이번 주 총"
                        Foreground="Gray"
                        FontSize="15" Margin="20,0,0,0"/>
-            <TextBlock Text="00시간 00분"
+            <TextBlock x:Name="txtWeekTimeSum"
+                       Text="00시간 00분"
                        Foreground="White"
                        FontSize="35" Margin="20,0,0,10"/>
             <TextBlock Text="이번 주 평균"
                        Foreground="Gray"
                        FontSize="15" Margin="20,0,0,0"/>
-            <TextBlock Text="00시간 00분"
+            <TextBlock x:Name="txtWeekTimeAve"
+                       Text="00시간 00분"
                        Foreground="White"
                        FontSize="35" Margin="20,0,0,20"/>
 
@@ -48,9 +50,104 @@
                         <RowDefinition/>
                         <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
+
                     
-                    <StackPanel Grid.ColumnSpan="7">
-                        <TextBlock Text="00시간 00분"
+
+                    <Border x:Name="bd7"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt7"
+                               Grid.Row="1"
+                           Text="월요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border x:Name="bd6"
+                        Grid.Column="1"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt6"
+                        Grid.Row="1" Grid.Column="1"
+                           Text="화요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border x:Name="bd5"
+                        Grid.Column="2"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt5"
+                         Grid.Row="1" Grid.Column="2"
+                           Text="수요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border x:Name="bd4"
+                        Grid.Column="3"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt4"
+                               Grid.Row="1" Grid.Column="3"
+                           Text="목요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border x:Name="bd3" 
+                        Grid.Column="4"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt3"
+                               Grid.Row="1" Grid.Column="4"
+                           Text="금요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border x:Name="bd2" 
+                        Grid.Column="5"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt2"
+                               Grid.Row="1" Grid.Column="5"
+                           Text="토요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <Border x:Name="bd1" 
+                        Grid.Column="6"
+                        Background="#FE6584"
+                        Width="18"
+                        CornerRadius="7,7,1,1"
+                        Margin="0,210,0,0"/>
+                    <TextBlock x:Name="txt1"
+                        Grid.Row="1" Grid.Column="6"
+                           Text="일요일"
+                           FontSize="11" Margin="0,15,0,0"
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+
+                    <StackPanel x:Name="spA"
+                                Grid.ColumnSpan="7" 
+                                Margin="0,190,0,0">
+                        <TextBlock x:Name="txtWTA"
+                                   Text="00시간 00분"
                                    FontSize="11" Margin="0,0,0,3"
                                    Foreground="#4eff91"
                                    HorizontalAlignment="Right"/>
@@ -60,81 +157,6 @@
                                 VerticalAlignment="Top"/>
                     </StackPanel>
 
-                    <Border Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1"
-                           Text="월요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
-
-                    <Border Grid.Column="1"
-                        Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="1"
-                           Text="화요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
-
-                    <Border Grid.Column="2"
-                        Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="2"
-                           Text="수요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
-
-                    <Border Grid.Column="3"
-                        Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="3"
-                           Text="목요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
-
-                    <Border Grid.Column="4"
-                        Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="4"
-                           Text="금요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
-
-                    <Border Grid.Column="5"
-                        Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="5"
-                           Text="토요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
-
-                    <Border Grid.Column="6"
-                        Background="#FE6584"
-                        Width="18"
-                        CornerRadius="7,7,1,1"
-                        Margin="0,15,0,0"/>
-                    <TextBlock Grid.Row="1" Grid.Column="6"
-                           Text="일요일"
-                           FontSize="11" Margin="0,15,0,0"
-                           HorizontalAlignment="Center"
-                           Foreground="White"/>
                 </Grid>
             </Border>
         </StackPanel>
@@ -156,18 +178,20 @@
                         <TextBlock Text="00분 줄었습니다."
                                    Foreground="White"/>
                         <Separator Background="Gray" Margin="0,5,0,10"/>
-                        <TextBlock Text="00시간 00분"
+                        <TextBlock x:Name="txtT1"
+                                   Text="00시간 00분"
                                    Foreground="#4eff91"/>
                         <Border Background="#4eff91"
                                 CornerRadius="5"
                                 Height="13"
-                                Margin="0,3,0,5"/>
-                        <TextBlock Text="00시간 00분"
+                                Margin="0,3,215,5"/>
+                        <TextBlock  x:Name="txtT2"
+                                    Text="00시간 00분"
                                    Foreground="Gray"/>
                         <Border Background="Gray"
                                 CornerRadius="5"
                                 Height="13"
-                                Margin="0,3,0,0"/>
+                                Margin="0,3,215,0"/>
                     </StackPanel>
                 </Border>
 
@@ -181,18 +205,20 @@
                         <TextBlock Text="00분 늘었습니다."
                                    Foreground="White"/>
                         <Separator Background="Gray" Margin="0,5,0,10"/>
-                        <TextBlock Text="00시간 00분"
+                        <TextBlock  x:Name="txtW1"
+                                    Text="00시간 00분"
                                    Foreground="#4eff91"/>
                         <Border Background="#4eff91"
                                 CornerRadius="5"
                                 Height="13"
-                                Margin="0,3,0,5"/>
-                        <TextBlock Text="00시간 00분"
+                                Margin="0,3,215,5"/>
+                        <TextBlock x:Name="txtW2"
+                                   Text="00시간 00분"
                                    Foreground="Gray"/>
                         <Border Background="Gray"
                                 CornerRadius="5"
                                 Height="13"
-                                Margin="0,3,0,0"/>
+                                Margin="0,3,215,0"/>
                     </StackPanel>
                 </Border>
 
@@ -211,13 +237,13 @@
                         <Border Background="#4eff91"
                                 CornerRadius="5"
                                 Height="13"
-                                Margin="0,3,0,5"/>
+                                Margin="0,3,215,5"/>
                         <TextBlock Text="00시간 00분"
                                    Foreground="Gray"/>
                         <Border Background="Gray"
                                 CornerRadius="5"
                                 Height="13"
-                                Margin="0,3,0,0"/>
+                                Margin="0,3,215,0"/>
                     </StackPanel>
                 </Border>
                 
