@@ -31,7 +31,7 @@ namespace ExerciseRecord.MVVM.View
         private static FirebaseClient _client;
 
         string connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dawon\source\repos\ExerciseRecord\ExerciseRecord\Memo.mdf;Integrated Security=True";
-        DispatcherTimer t = new DispatcherTimer();
+        //DispatcherTimer t = new DispatcherTimer();
         string date = DateTime.Now.ToString("yyyyMMdd");
 
         public TodayView()
@@ -76,8 +76,8 @@ namespace ExerciseRecord.MVVM.View
                 _client.Set<int>(date + "/ET", 0);
                 _client.Set<int>(date + "/OT", 0);
                 _client.Set<int>(date + " / OC", 0);
-                response = await _client.GetAsync("20220608" + "/LR");
-                MessageBox.Show(response.ResultAs<string>());
+                //response = await _client.GetAsync(date + "/LR");
+                //MessageBox.Show(response.ResultAs<string>());
             }
             getfbe();
             getfbt();
@@ -88,7 +88,7 @@ namespace ExerciseRecord.MVVM.View
             FirebaseResponse response = await _client.GetAsync(date + "/ET");
             int value = response.ResultAs<int>();
             if (value > 3600)
-                txtTodayTime.Text = (value / 3600).ToString("00") + "시간 " + (value - (value / 3600) % 60).ToString("00") + "분";
+                txtTodayTime.Text = (value / 3600).ToString("00") + "시간 " + (value % 3600 % 60).ToString("00") + "분";
             else
                 txtTodayTime.Text = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
         }
@@ -130,11 +130,25 @@ namespace ExerciseRecord.MVVM.View
                 todayList.Items.Refresh();
             }
 
+            response = await _client.GetAsync(date + "/PU");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { Image = "/Images/PushUp.png", ExeName = "Push Up", info = value.ToString() + "회" });
+                todayList.ItemsSource = items;
+                todayList.Items.Refresh();
+            }
+
             response = await _client.GetAsync(date + "/PL");
             value = response.ResultAs<int>();
             if (value > 0)
             {
-                items.Add(new Exercise() { Image = "/Images/Plank.png", ExeName = "Plank", info = value.ToString() + "초" });
+                string time;
+                if (value > 3600)
+                    time = (value / 3600).ToString("00") + "시간 " + (value % 3600 % 60).ToString("00") + "분";
+                else
+                    time = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
+                items.Add(new Exercise() { Image = "/Images/Plank.png", ExeName = "Plank", info = time });
                 todayList.ItemsSource = items;
                 todayList.Items.Refresh();
             }
@@ -148,16 +162,29 @@ namespace ExerciseRecord.MVVM.View
                 todayList.Items.Refresh();
             }
 
-            response = await _client.GetAsync(date + "/PU");
+            response = await _client.GetAsync(date + "/OT");
             value = response.ResultAs<int>();
             if (value > 0)
             {
-                items.Add(new Exercise() { Image = "/Images/PushUp.png", ExeName = "Push Up", info = value.ToString() + "회" });
+                string time;
+                if (value > 3600)
+                    time = (value / 3600).ToString("00") + "시간 " + (value % 3600 % 60).ToString("00") + "분";
+                else
+                    time = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
+                items.Add(new Exercise() { Image = "/Images/Timer.png", ExeName = "Timer", info = time });
+                todayList.ItemsSource = items;
+                todayList.Items.Refresh();
+            }
+
+            response = await _client.GetAsync(date + "/OC");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { Image = "/Images/Count.png", ExeName = "Count", info = value.ToString() + "회" });
                 todayList.ItemsSource = items;
                 todayList.Items.Refresh();
             }
         }
-
 
         private void btnMemo_Click(object sender, RoutedEventArgs e)
         {

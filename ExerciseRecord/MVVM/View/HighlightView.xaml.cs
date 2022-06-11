@@ -81,17 +81,55 @@ namespace ExerciseRecord.MVVM.View
                     max = i;
             }
 
+            //지난주
+            int lastWsum = 0;
+            for (int i = -7; i > -14; i--)
+            {
+                string lastWD = d.AddDays(i).ToString("yyyyMMdd");
+                response = await _client.GetAsync(lastWD + "/ET");
+                if (response.ResultAs<string>() != null)
+                    lastWsum += response.ResultAs<int>();
+                else lastWsum += 0;
+            }
+
+            //이번 달
+            int Msum = 0;
+            for (int i = 1; i > -28; i--)
+            {
+                string lastMD = d.AddDays(i).ToString("yyyyMMdd");
+                response = await _client.GetAsync(lastMD + "/ET");
+                if (response.ResultAs<string>() != null)
+                    Msum += response.ResultAs<int>();
+                else Msum += 0;
+            }
+
+            //지난 달
+            int lastMsum = 0;
+            for (int i = -28; i > -56; i--)
+            {
+                string lastMD = d.AddDays(i).ToString("yyyyMMdd");
+                response = await _client.GetAsync(lastMD + "/ET");
+                if (response.ResultAs<string>() != null)
+                    lastMsum += response.ResultAs<int>();
+                else lastMsum += 0;
+            }
+
             timeprint(time1, txtT1); //오늘 시간
             timeprint(time2, txtT2); //어제 시간
             timeprint(sum, txtWeekTimeSum); //이번주 총 시간
             timeprint(sum / 7, txtWeekTimeAve); //이번주 평균 시간
             timeprint(sum / 7, txtWTA);
             timeprint(sum / 7, txtW1);
+            timeprint(lastWsum / 7, txtW2); //지난주 평균 시간
+            timeprint(Msum / 7, txtM1); //이번달 평균 시간
+            timeprint(lastMsum / 7, txtM2); //지난달 평균 시간
 
+
+            //시간 출력 함수
             void timeprint(int t, TextBlock txt)
             {
                 if (t > 3600)
-                    txt.Text = (t / 3600).ToString("00") + "시간 " + (t - (t / 3600) % 60).ToString("00") + "분";
+                    txt.Text = (t / 3600).ToString("00") + "시간 " + (t % 3600 % 60).ToString("00") + "분";
                 else
                     txt.Text = (t / 60).ToString("00") + "분 " + (t % 60).ToString("00") + "초";
             }
@@ -114,6 +152,45 @@ namespace ExerciseRecord.MVVM.View
             bd7.Margin = new System.Windows.Thickness { Left = 0, Top = mg7, Right = 0, Bottom = 0 };
             spA.Margin = new System.Windows.Thickness { Left = 0, Top = mgA, Right = 0, Bottom = 0 };
 
+            getResult(time1, time2, bdT1, bdT2, txtTResult); //하루 분석
+            getResult(sum / 7, lastWsum / 7, bdW1, bdW2, txtWResult); //주 분석
+            getResult(Msum / 7, lastMsum / 7, bdM1, bdM2, txtMResult); //달 분석
+
+
+            //분석 함수
+            void getResult(int t1, int t2, Border b1, Border b2, TextBlock txt)
+            {
+                int maxDay;
+                if (t1 > t2)
+                    maxDay = t1;
+                else maxDay = t2;
+                int mgR1 = 215 - (215 * t1 / maxDay);
+                int mgR2 = 215 - (215 * t2 / maxDay);
+
+                b1.Margin = new System.Windows.Thickness { Left = 0, Top = 3, Right = mgR1, Bottom = 0 };
+                b2.Margin = new System.Windows.Thickness { Left = 0, Top = 3, Right = mgR2, Bottom = 0 };
+
+                if (maxDay == t1)
+                {
+                    int t = t1 - t2;
+                    if (t > 3600)
+                        txt.Text = (t / 3600).ToString() + "시간 " + (t % 3600 % 60).ToString() + "분 늘었습니다.";
+                    else if (t > 60)
+                        txt.Text = (t / 60).ToString() + "분 늘었습니다.";
+                    else
+                        txt.Text = t.ToString() + "초 늘었습니다.";
+                }
+                else
+                {
+                    int t = t2 - t1;
+                    if (t > 3600)
+                        txt.Text = (t / 3600).ToString() + "시간 " + (t % 3600 % 60).ToString() + "분 줄었습니다.";
+                    else if (t > 60)
+                        txt.Text = (t / 60).ToString() + "분 줄었습니다.";
+                    else
+                        txt.Text = t.ToString() + "초 줄었습니다.";
+                }
+            }
         }
 
         private void getWeek()

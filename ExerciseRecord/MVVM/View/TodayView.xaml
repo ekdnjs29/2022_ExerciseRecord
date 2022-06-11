@@ -30,6 +30,21 @@
                       Background="#F1F2F6"
                       BorderThickness="0"
                       d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.Resources>
+                    <Style TargetType="{x:Type ScrollBar}">
+                        <Setter Property="Background" Value="Gray"/>
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                                    <Grid x:Name="Bg" SnapsToDevicePixels="True">
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+
+                    </Style>
+                </ListView.Resources>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,0,0,5" Height="70">
@@ -37,20 +52,20 @@
                                 <ColumnDefinition Width="70"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Image Height="60" Width="60" 
+                            <Image Height="70" Width="70" 
                                    Source="{Binding Image}"></Image>
                             <Border Grid.Column="1" Margin="5,0,0,0" Padding="5"
                                     BorderBrush="#5bc3ff"
                                     BorderThickness="2,0,0,0">
-                            <StackPanel >
-                                <TextBlock Text="{Binding ExeName}"
+                                <StackPanel >
+                                    <TextBlock Text="{Binding ExeName}"
                                            FontWeight="Black"
                                            FontSize="18"
                                            Margin="5,0,0,5"/>
-                                <TextBlock Text="{Binding info}"
+                                    <TextBlock Text="{Binding info}"
                                            FontSize="15"
                                            Margin="5,0,0,0"/>
-                                   
+
                                 </StackPanel>
                             </Border>
                         </Grid>

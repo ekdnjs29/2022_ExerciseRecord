@@ -29,6 +29,7 @@ namespace ExerciseRecord.MVVM.View
         public string ttdd;
 
         string connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dawon\source\repos\ExerciseRecord\ExerciseRecord\Memo.mdf;Integrated Security=True";
+        string date = DateTime.Now.ToString("yyyyMMdd");
 
         public CalendarView()
         {
@@ -39,6 +40,28 @@ namespace ExerciseRecord.MVVM.View
                 BasePath = BasePath
             };
             _client = new FirebaseClient(config);
+
+
+            getfb(date);
+            getfbt(date);
+
+            SqlConnection conn = new SqlConnection(connStr);
+            conn.Open();
+
+            string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", ttdd);
+
+            SqlCommand comm = new SqlCommand(sql, conn);
+            int count = Convert.ToInt32(comm.ExecuteScalar());
+
+            if (count == 1)
+            {
+                // MessageBox.Show("1");
+                Memo(date);
+            }
+            else
+                lblMemo.Text = "";
+
+            conn.Close();
         }
 
         List<Exercise> items = new List<Exercise>();
@@ -56,8 +79,9 @@ namespace ExerciseRecord.MVVM.View
             ttdd = td.Substring(0, 10);
             ttdd = ttdd.Replace("-", "");
 
-            getfb();
-            getfbt();
+            items.Clear();
+            getfb(ttdd);
+            getfbt(ttdd);
 
             //날짜에 해당하는 데이터
             FirebaseResponse response = await _client.GetAsync(ttdd + "/LR");
@@ -75,7 +99,7 @@ namespace ExerciseRecord.MVVM.View
             if (count == 1)
             {
                 // MessageBox.Show("1");
-                Memo();
+                Memo(ttdd);
             }
             else
                 lblMemo.Text = "";
@@ -83,19 +107,20 @@ namespace ExerciseRecord.MVVM.View
             conn.Close();
         }
 
-        private async void getfbt()
+        private async void getfbt(string d)
         {
-            FirebaseResponse response = await _client.GetAsync(ttdd + "/ET");
+            FirebaseResponse response = await _client.GetAsync(d + "/ET");
             int value = response.ResultAs<int>();
             if (value > 3600)
-                txtETime.Text = (value / 3600).ToString("00") + "시간 " + (value - (value / 3600) % 60).ToString("00") + "분";
+                txtETime.Text = (value / 3600).ToString("00") + "시간 " + (value % 3600 % 60).ToString("00") + "분";
             else
                 txtETime.Text = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
         }
 
-        private async void getfb()
+        private async void getfb(string d)
         {
-            FirebaseResponse response = await _client.GetAsync(ttdd + "/LR");
+            items = new List<Exercise>();
+            FirebaseResponse response = await _client.GetAsync(d + "/LR");
             int value = response.ResultAs<int>();
             if (value > 0)
             {
@@ -104,16 +129,21 @@ namespace ExerciseRecord.MVVM.View
                 CList.Items.Refresh();
             }
 
-            response = await _client.GetAsync(ttdd + "/PL");
+            response = await _client.GetAsync(d + "/PL");
             value = response.ResultAs<int>();
             if (value > 0)
             {
-                items.Add(new Exercise() {ExeName = "Plank", info = value.ToString() + "초" });
+                string time;
+                if (value > 3600)
+                    time = (value / 3600).ToString("00") + "시간 " + (value % 3600 % 60).ToString("00") + "분";
+                else
+                    time = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
+                items.Add(new Exercise() { ExeName = "Plank", info = time });
                 CList.ItemsSource = items;
                 CList.Items.Refresh();
             }
 
-            response = await _client.GetAsync(ttdd + "/SU");
+            response = await _client.GetAsync(d + "/SU");
             value = response.ResultAs<int>();
             if (value > 0)
             {
@@ -122,7 +152,7 @@ namespace ExerciseRecord.MVVM.View
                 CList.Items.Refresh();
             }
 
-            response = await _client.GetAsync(ttdd + "/PU");
+            response = await _client.GetAsync(d + "/PU");
             value = response.ResultAs<int>();
             if (value > 0)
             {
@@ -130,14 +160,38 @@ namespace ExerciseRecord.MVVM.View
                 CList.ItemsSource = items;
                 CList.Items.Refresh();
             }
+
+            response = await _client.GetAsync(d + "/OC");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                items.Add(new Exercise() { ExeName = "Count", info = value.ToString() + "회" });
+                CList.ItemsSource = items;
+                CList.Items.Refresh();
+            }
+
+            response = await _client.GetAsync(d + "/OT");
+            value = response.ResultAs<int>();
+            if (value > 0)
+            {
+                string time;
+                if (value > 3600)
+                    time = (value / 3600).ToString("00") + "시간 " + (value % 3600 % 60).ToString("00") + "분";
+                else
+                    time = (value / 60).ToString("00") + "분 " + (value % 60).ToString("00") + "초";
+                items.Add(new Exercise() { ExeName = "Timer", info = time });
+                CList.ItemsSource = items;
+                CList.Items.Refresh();
+            }
+
         }
 
-        private void Memo()
+        private void Memo(string d)
         {
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
-            string sql = string.Format("SELECT * FROM MemoTable WHERE Date='{0}'", ttdd);
+            string sql = string.Format("SELECT * FROM MemoTable WHERE Date='{0}'", d);
 
             SqlCommand comm = new SqlCommand(sql, conn);
             SqlDataReader reader = comm.ExecuteReader();

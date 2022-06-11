@@ -365,7 +365,6 @@
                                         <Setter.Value>
                                             <ControlTemplate TargetType="{x:Type ScrollBar}">
                                                 <Grid x:Name="Bg" SnapsToDevicePixels="True">
-                                                  
                                                 </Grid>
                                             </ControlTemplate>
                                         </Setter.Value>

@@ -175,20 +175,23 @@
                     <StackPanel>
                         <TextBlock Text="오늘 운동량이 어제보다"
                                    Foreground="White"/>
-                        <TextBlock Text="00분 줄었습니다."
+                        <TextBlock x:Name="txtTResult"
+                                   Text="00분 줄었습니다."
                                    Foreground="White"/>
                         <Separator Background="Gray" Margin="0,5,0,10"/>
                         <TextBlock x:Name="txtT1"
                                    Text="00시간 00분"
                                    Foreground="#4eff91"/>
-                        <Border Background="#4eff91"
+                        <Border x:Name="bdT1"
+                                Background="#4eff91"
                                 CornerRadius="5"
                                 Height="13"
                                 Margin="0,3,215,5"/>
                         <TextBlock  x:Name="txtT2"
                                     Text="00시간 00분"
                                    Foreground="Gray"/>
-                        <Border Background="Gray"
+                        <Border x:Name="bdT2"
+                                Background="Gray"
                                 CornerRadius="5"
                                 Height="13"
                                 Margin="0,3,215,0"/>
@@ -202,20 +205,23 @@
                     <StackPanel>
                         <TextBlock Text="이번 주 평균 운동량이 저번주보다"
                                    Foreground="White"/>
-                        <TextBlock Text="00분 늘었습니다."
+                        <TextBlock x:Name="txtWResult"
+                                   Text="00분 늘었습니다."
                                    Foreground="White"/>
                         <Separator Background="Gray" Margin="0,5,0,10"/>
                         <TextBlock  x:Name="txtW1"
                                     Text="00시간 00분"
                                    Foreground="#4eff91"/>
-                        <Border Background="#4eff91"
+                        <Border  x:Name="bdW1"
+                                 Background="#4eff91"
                                 CornerRadius="5"
                                 Height="13"
                                 Margin="0,3,215,5"/>
                         <TextBlock x:Name="txtW2"
                                    Text="00시간 00분"
                                    Foreground="Gray"/>
-                        <Border Background="Gray"
+                        <Border  x:Name="bdW2"
+                                 Background="Gray"
                                 CornerRadius="5"
                                 Height="13"
                                 Margin="0,3,215,0"/>
@@ -229,18 +235,23 @@
                     <StackPanel>
                         <TextBlock Text="이번 달 평균 운동량이 저번달보다"
                                    Foreground="White"/>
-                        <TextBlock Text="00분 늘었습니다."
+                        <TextBlock x:Name="txtMResult"
+                                   Text="00분 늘었습니다."
                                   Foreground="White"/>
                         <Separator Background="Gray" Margin="0,5,0,10"/>
-                        <TextBlock Text="00시간 00분"
+                        <TextBlock x:Name="txtM1"
+                                   Text="00시간 00분"
                                    Foreground="#4eff91"/>
-                        <Border Background="#4eff91"
+                        <Border x:Name="bdM1"
+                                Background="#4eff91"
                                 CornerRadius="5"
                                 Height="13"
                                 Margin="0,3,215,5"/>
-                        <TextBlock Text="00시간 00분"
+                        <TextBlock x:Name="txtM2"
+                                   Text="00시간 00분"
                                    Foreground="Gray"/>
-                        <Border Background="Gray"
+                        <Border x:Name="bdM2"
+                                Background="Gray"
                                 CornerRadius="5"
                                 Height="13"
                                 Margin="0,3,215,0"/>

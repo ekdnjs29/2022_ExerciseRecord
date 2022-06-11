@@ -170,23 +170,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Count.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\LegRaise.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Plank.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\PushUp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\SitUp.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Timer.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Resource Include="Images\PushUp.png" />
+    <Resource Include="Images\SitUp.png" />
+    <Resource Include="Images\LegRaise.png" />
     <Content Include="Memo.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
