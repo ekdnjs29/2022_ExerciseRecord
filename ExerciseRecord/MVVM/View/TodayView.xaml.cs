@@ -26,8 +26,8 @@ namespace ExerciseRecord.MVVM.View
     /// </summary>
     public partial class TodayView : UserControl
     {
-        private const string BasePath = "https://dcdc-14c7d-default-rtdb.firebaseio.com/";//본인의 FB URL
-        private const string FirebaseSecret = "e54zPLcujgDI9A9LflL9zVzrgyJIWbjbfT5bszzC"; // FB 비번
+        private const string BasePath = "https://dcdc-14c7d-default-rtdb.firebaseio.com/";   //본인의 FB URL
+        private const string FirebaseSecret = "e54zPLcujgDI9A9LflL9zVzrgyJIWbjbfT5bszzC";    // FB 비번
         private static FirebaseClient _client;
 
         string connStr = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\dawon\source\repos\ExerciseRecord\ExerciseRecord\Memo.mdf;Integrated Security=True";
@@ -66,7 +66,7 @@ namespace ExerciseRecord.MVVM.View
 
         private async void getfb()
         {
-            FirebaseResponse response = await _client.GetAsync(date + "/OC");
+            FirebaseResponse response = await _client.GetAsync(date + "/ET");
             if (response.ResultAs<string>() == null)
             {
                 _client.Set<int>(date + "/LR", 0);
@@ -75,12 +75,10 @@ namespace ExerciseRecord.MVVM.View
                 _client.Set<int>(date + "/SU", 0);
                 _client.Set<int>(date + "/ET", 0);
                 _client.Set<int>(date + "/OT", 0);
-                _client.Set<int>(date + " / OC", 0);
-                //response = await _client.GetAsync(date + "/LR");
-                //MessageBox.Show(response.ResultAs<string>());
+                _client.Set<int>(date + "/OC", 0);
             }
-            getfbe();
-            getfbt();
+            getfbe(); //불러온 운동을 리스트뷰에 표시
+            getfbt(); //불러온 시간 표시
         }
 
         private async void getfbt()

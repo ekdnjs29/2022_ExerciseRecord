@@ -48,7 +48,7 @@ namespace ExerciseRecord.MVVM.View
             SqlConnection conn = new SqlConnection(connStr);
             conn.Open();
 
-            string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", ttdd);
+            string sql = string.Format("SELECT COUNT(*) From MemoTable WHERE Date='{0}'", date);
 
             SqlCommand comm = new SqlCommand(sql, conn);
             int count = Convert.ToInt32(comm.ExecuteScalar());
@@ -80,6 +80,7 @@ namespace ExerciseRecord.MVVM.View
             ttdd = ttdd.Replace("-", "");
 
             items.Clear();
+            CList.ItemsSource = null;
             getfb(ttdd);
             getfbt(ttdd);
 

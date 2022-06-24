@@ -57,18 +57,35 @@ namespace ExerciseRecord.MVVM.View
            
             FirebaseResponse response = await _client.GetAsync(date1 + "/ET");
             int time1 = response.ResultAs<int>();
+            int time2, time3, time4, time5, time6, time7;
             response = await _client.GetAsync(date2 + "/ET");
-            int time2= response.ResultAs<int>();
+            if (response.ResultAs<string>() != null)
+                time2 = response.ResultAs<int>();
+            else time2 = 0;
             response = await _client.GetAsync(date3 + "/ET");
-            int time3 = response.ResultAs<int>();
+            if (response.ResultAs<string>() != null)
+                time3 = response.ResultAs<int>();
+            else time3 = 0;
             response = await _client.GetAsync(date4 + "/ET");
-            int time4 = response.ResultAs<int>();
+            if (response.ResultAs<string>() != null)
+                time4 = response.ResultAs<int>();
+            else
+                time4 = 0;
             response = await _client.GetAsync(date5 + "/ET");
-            int time5 = response.ResultAs<int>();
+            if (response.ResultAs<string>() != null)
+                time5 = response.ResultAs<int>();
+            else
+                time5 = 0;
             response = await _client.GetAsync(date6 + "/ET");
-            int time6 = response.ResultAs<int>();
+            if (response.ResultAs<string>() != null)
+                time6 = response.ResultAs<int>();
+            else
+                time6 = 0;
             response = await _client.GetAsync(date7 + "/ET");
-            int time7 = response.ResultAs<int>();
+            if (response.ResultAs<string>() != null)
+                time7 = response.ResultAs<int>();
+            else
+                time7 = 0;
 
             int[] time = { time1, time2, time3, time4, time5, time6, time7 };
             int max = time[0];
@@ -129,7 +146,7 @@ namespace ExerciseRecord.MVVM.View
             void timeprint(int t, TextBlock txt)
             {
                 if (t > 3600)
-                    txt.Text = (t / 3600).ToString("00") + "시간 " + (t % 3600 % 60).ToString("00") + "분";
+                    txt.Text = (t / 3600).ToString() + "시간 " + (t % 3600 % 60).ToString("00") + "분";
                 else
                     txt.Text = (t / 60).ToString("00") + "분 " + (t % 60).ToString("00") + "초";
             }
@@ -195,8 +212,7 @@ namespace ExerciseRecord.MVVM.View
 
         private void getWeek()
         {
-            DateTime dt = DateTime.Now;
-            string Week = dt.DayOfWeek.ToString();
+            string Week = d.DayOfWeek.ToString();
 
             if(Week == "Monday")
             {
